@@ -1,31 +1,41 @@
-l<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
-<title>Calculator</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Tasbeh</title>
 <style>
-body{text-align:center; font-family:Arial; margin-top:50px}
-input{width:200px; height:40px; font-size:20px}
-button{width:50px; height:50px; margin:5px; font-size:20px}
+body{background:#1a1a2e;display:flex;justify-content:center;align-items:center;min-height:100vh;margin:0}
+.box{background:linear-gradient(135deg,#ff6ec4,#7873f5);border-radius:30px;padding:20px;width:320px;text-align:center;color:#fff;font-family:Arial}
+#r{width:90%;height:45px;font-size:22px;border-radius:12px;border:none;text-align:right;padding:8px;margin:10px}
+button{width:60px;height:60px;margin:4px;border-radius:50%;border:none;font-size:20px}
 </style>
 </head>
 <body>
+<div class="box">
 <h2>Calculator - Tasbeh</h2>
-<input id="result" readonly><br>
-<button onclick="result.value+='7'">7</button>
-<button onclick="result.value+='8'">8</button>
-<button onclick="result.value+='9'">9</button>
-<button onclick="result.value+='/'">/</button><br>
-<button onclick="result.value+='4'">4</button>
-<button onclick="result.value+='5'">5</button>
-<button onclick="result.value+='6'">6</button>
-<button onclick="result.value+='*'">*</button><br>
-<button onclick="result.value+='1'">1</button>
-<button onclick="result.value+='2'">2</button>
-<button onclick="result.value+='3'">3</button>
-<button onclick="result.value+='-'">-</button><br>
-<button onclick="result.value+='0'">0</button>
-<button onclick="result.value=''">C</button>
-<button onclick="result.value=eval(result.value)">=</button>
-<button onclick="result.value+='+'">+</button>
+<p>📿 تسبيح: <span id="t">0</span> <button onclick="t1()">+</button></p>
+<input id="r" readonly><br>
+<button onclick="r.value+='7'">7</button>
+<button onclick="r.value+='8'">8</button>
+<button onclick="r.value+='9'">9</button>
+<button onclick="r.value+='/'">÷</button><br>
+<button onclick="r.value+='4'">4</button>
+<button onclick="r.value+='5'">5</button>
+<button onclick="r.value+='6'">6</button>
+<button onclick="r.value+='*'">×</button><br>
+<button onclick="r.value+='1'">1</button>
+<button onclick="r.value+='2'">2</button>
+<button onclick="r.value+='3'">3</button>
+<button onclick="r.value+='-'">-</button><br>
+<button onclick="r.value=''">C</button>
+<button onclick="r.value+='0'">0</button>
+<button onclick="r.value=eval(r.value)">=</button>
+<button onclick="r.value+='+'">+</button>
+</div>
+<script>
+let c=0;
+function t1(){c++;if(c>33)c=1;document.getElementById('t').innerText=c}
+</script>
 </body>
 </html>
