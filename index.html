@@ -1,41 +1,75 @@
 <!DOCTYPE html>
-<html>
+<html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Tasbeh</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TASBEH PRO - GKS Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
 <style>
-body{background:#1a1a2e;display:flex;justify-content:center;align-items:center;min-height:100vh;margin:0}
-.box{background:linear-gradient(135deg,#ff6ec4,#7873f5);border-radius:30px;padding:20px;width:320px;text-align:center;color:#fff;font-family:Arial}
-#r{width:90%;height:45px;font-size:22px;border-radius:12px;border:none;text-align:right;padding:8px;margin:10px}
-button{width:60px;height:60px;margin:4px;border-radius:50%;border:none;font-size:20px}
+  :root{--gold:#D4AF37;--dark:#0F172A;--card:#1E293B;}
+  body{font-family:'Tajawal',sans-serif;background:radial-gradient(circle at top,#1e293b,#0f172a);min-height:100vh;margin:0;display:flex;justify-content:center;align-items:center;padding:20px;color:white;}
+ .container{max-width:380px;width:100%;}
+ .header{text-align:center;margin-bottom:20px;}
+ .header h1{color:var(--gold);margin:0;font-size:28px;}
+ .header p{opacity:0.6;margin:5px 0 0;font-size:14px;}
+ .card{background:var(--card);border-radius:24px;padding:20px;box-shadow:0 20px 60px rgba(0,0,0,0.5);border:1px solid rgba(212,175,55,0.2);}
+ .tasbeh-box{background:linear-gradient(135deg,#0f172a,#1e293b);border-radius:20px;padding:20px;text-align:center;border:1px solid rgba(212,175,55,0.3);margin-bottom:20px;}
+ .tasbeh-count{font-size:64px;font-weight:900;color:var(--gold);margin:10px 0;}
+ .tasbeh-text{font-size:22px;font-weight:700;margin-bottom:15px;}
+ .progress{height:6px;background:#334155;border-radius:10px;overflow:hidden;margin:15px 0;}
+ .progress-fill{height:100%;background:var(--gold);width:0%;transition:0.3s;}
+ .btn-gold{background:linear-gradient(135deg,#D4AF37,#B8941F);border:none;padding:14px 30px;border-radius:50px;color:#0f172a;font-weight:900;font-size:18px;width:100%;cursor:pointer;}
+ .calc-display{background:#0f172a;border-radius:16px;padding:15px;text-align:left;margin-bottom:15px;min-height:60px;}
+ .calc-display.prev{opacity:0.5;font-size:14px;min-height:18px;direction:ltr;}
+ .calc-display.curr{font-size:32px;font-weight:700;direction:ltr;}
+ .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;}
+ .btn{border:none;border-radius:14px;padding:16px;font-size:18px;font-weight:700;cursor:pointer;}
+ .btn-num{background:#334155;color:white;}
+ .btn-op{background:rgba(212,175,55,0.15);color:var(--gold);border:1px solid rgba(212,175,55,0.3);}
+ .btn-eq{background:var(--gold);color:#0f172a;}
+ .tabs{display:flex;gap:10px;margin-bottom:15px;}
+ .tab{flex:1;padding:10px;border-radius:12px;border:1px solid rgba(255,255,255,0.1);background:transparent;color:white;cursor:pointer;}
+ .tab.active{background:var(--gold);color:#0f172a;font-weight:900;border-color:var(--gold);}
+ .footer{text-align:center;margin-top:15px;opacity:0.4;font-size:11px;letter-spacing:2px;}
 </style>
 </head>
 <body>
-<div class="box">
-<h2>Calculator - Tasbeh</h2>
-<p>📿 تسبيح: <span id="t">0</span> <button onclick="t1()">+</button></p>
-<input id="r" readonly><br>
-<button onclick="r.value+='7'">7</button>
-<button onclick="r.value+='8'">8</button>
-<button onclick="r.value+='9'">9</button>
-<button onclick="r.value+='/'">÷</button><br>
-<button onclick="r.value+='4'">4</button>
-<button onclick="r.value+='5'">5</button>
-<button onclick="r.value+='6'">6</button>
-<button onclick="r.value+='*'">×</button><br>
-<button onclick="r.value+='1'">1</button>
-<button onclick="r.value+='2'">2</button>
-<button onclick="r.value+='3'">3</button>
-<button onclick="r.value+='-'">-</button><br>
-<button onclick="r.value=''">C</button>
-<button onclick="r.value+='0'">0</button>
-<button onclick="r.value=eval(r.value)">=</button>
-<button onclick="r.value+='+'">+</button>
+<div class="container">
+  <div class="header"><h1>TASBEH PRO</h1><p>by Mohammed Tasbeh • Mecca, KSA</p></div>
+  <div class="card">
+    <div class="tabs">
+      <button class="tab active" onclick="showTab('tasbeh')">السبحة</button>
+      <button class="tab" onclick="showTab('calc')">الحاسبة</button>
+    </div>
+    <div id="tasbehTab">
+      <div class="tasbeh-box">
+        <div class="tasbeh-text" id="zekr">سبحان الله</div>
+        <div class="tasbeh-count" id="count">0</div>
+        <div class="progress"><div class="progress-fill" id="progress"></div></div>
+        <div style="display:flex;justify-content:space-between;font-size:12px;opacity:0.6;margin-bottom:15px"><span>الهدف: 33</span><span id="cycle">دورة 1</span></div>
+        <button class="btn-gold" onclick="doTasbeh()">اضغط للتسبيح</button>
+        <button onclick="resetTasbeh()" style="background:transparent;border:none;color:rgba(255,255,255,0.5);margin-top:12px;cursor:pointer">إعادة تعيين</button>
+      </div>
+    </div>
+    <div id="calcTab" style="display:none">
+      <div class="calc-display"><div class="prev" id="prev"></div><div class="curr" id="curr">0</div></div>
+      <div class="grid">
+        <button class="btn btn-op" onclick="clearCalc()">AC</button><button class="btn btn-op" onclick="del()">⌫</button><button class="btn btn-op" onclick="append('%')">%</button><button class="btn btn-op" onclick="append('/')">÷</button>
+        <button class="btn btn-num" onclick="append('7')">7</button><button class="btn btn-num" onclick="append('8')">8</button><button class="btn btn-num" onclick="append('9')">9</button><button class="btn btn-op" onclick="append('*')">×</button>
+        <button class="btn btn-num" onclick="append('4')">4</button><button class="btn btn-num" onclick="append('5')">5</button><button class="btn btn-num" onclick="append('6')">6</button><button class="btn btn-op" onclick="append('-')">−</button>
+        <button class="btn btn-num" onclick="append('1')">1</button><button class="btn btn-num" onclick="append('2')">2</button><button class="btn btn-num" onclick="append('3')">3</button><button class="btn btn-op" onclick="append('+')">+</button>
+        <button class="btn btn-num" onclick="append('0')">0</button><button class="btn btn-num" onclick="append('.')">.</button><button class="btn btn-eq" style="grid-column:span 2" onclick="calc()">=</button>
+      </div>
+    </div>
+    <div class="footer">DESIGNED FOR GKS PORTFOLIO 2026</div>
+  </div>
 </div>
 <script>
-let c=0;
-function t1(){c++;if(c>33)c=1;document.getElementById('t').innerText=c}
+let count=0,cycle=1;const azkar=["سبحان الله","الحمد لله","الله أكبر"];
+function doTasbeh(){count++;if(count>33){count=1;cycle++;if(cycle>3)cycle=1;}document.getElementById('count').innerText=count;document.getElementById('progress').style.width=(count/33*100)+'%';document.getElementById('zekr').innerText=azkar[cycle-1];document.getElementById('cycle').innerText='دورة '+cycle+' / 3';navigator.vibrate&&navigator.vibrate(50);}
+function resetTasbeh(){count=0;cycle=1;document.getElementById('count').innerText=0;document.getElementById('progress').style.width='0%';document.getElementById('zekr').innerText=azkar[0];document.getElementById('cycle').innerText='دورة 1 / 3';}
+function showTab(t){document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));if(t==='tasbeh'){document.getElementById('tasbehTab').style.display='block';document.getElementById('calcTab').style.display='none';document.querySelectorAll('.tab')[0].classList.add('active');}else{document.getElementById('tasbehTab').style.display='none';document.getElementById('calcTab').style.display='block';document.querySelectorAll('.tab')[1].classList.add('active');}}
+let expr='';function append(v){expr+=v;update();}function update(){document.getElementById('curr').innerText=expr||'0';}function clearCalc(){expr='';document.getElementById('prev').innerText='';update();}function del(){expr=expr.slice(0,-1);update();}function calc(){try{let e=expr.replace(/÷/g,'/').replace(/×/g,'*');let r=eval(e);document.getElementById('prev').innerText=expr+' =';expr=r.toString();update();}catch{expr='';document.getElementById('curr').innerText='خطأ';}}
 </script>
 </body>
 </html>
